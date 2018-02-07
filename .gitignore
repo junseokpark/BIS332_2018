@@ -56,3 +56,4 @@ build.log
 !/libs/spring-expression-4.3.14.RELEASE.jar
 !/libs/spring-boot-1.5.10.RELEASE.jar
 !/libs/spring-boot-autoconfigure-1.5.10.RELEASE.jar
+!/libs/spring-web-4.3.14.RELEASE.jar
