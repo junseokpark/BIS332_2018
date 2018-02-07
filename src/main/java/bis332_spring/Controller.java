@@ -1,4 +1,4 @@
-package bis332;
+package bis332_spring;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
