@@ -63,11 +63,11 @@ public class Controller {
         Statement stmt = null;
         ResultSet rs = null;
         String sql = "";
-        String IP_ADDRESS="chrome.kaist.ac.kr";
-        String PORT="5438";
-        String DB_NAME="postgres"; // Student Number
-        String ID="postgres"; //Student Number
-        String Passwd="bislaprom3!";  //Password
+        String IP_ADDRESS="";
+        String PORT="";
+        String DB_NAME=""; // Student Number
+        String ID= ""; //Student Number
+        String Passwd="";  //Password
 
         String webContents = "";
 
