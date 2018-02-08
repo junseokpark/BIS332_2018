@@ -1,3 +1,5 @@
+package bis332;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,18 +55,20 @@ public class Controller {
     }
 
     // example #4 : JDBC Page Test
-    private Connection conn = null;
-    private Statement stmt = null;
-    private ResultSet rs = null;
-    private String sql = "";
-    private String IP_ADDRESS="biostar.kaist.ac.kr";
-    private String PORT="5438";
-    private String DB_NAME="postgres"; // Student Number
-    private String ID="postgres"; //Student Number
-    private String Passwd="bislaprom3!";  //Password
+
 
     @RequestMapping("/jdbcexample")
     public String jdbcexample() throws Exception {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String sql = "";
+        String IP_ADDRESS="chrome.kaist.ac.kr";
+        String PORT="5438";
+        String DB_NAME="postgres"; // Student Number
+        String ID="postgres"; //Student Number
+        String Passwd="bislaprom3!";  //Password
+
         String webContents = "";
 
         try {
@@ -103,5 +107,6 @@ public class Controller {
         return webContents;
 
     }
+
 
 }
