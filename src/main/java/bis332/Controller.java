@@ -1,9 +1,13 @@
 package bis332;
 
+import bis332.objects.CalculatorObject;
+import bis332.objects.GeneInfoObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class Controller {
@@ -55,8 +59,6 @@ public class Controller {
     }
 
     // example #4 : JDBC Page Test
-
-
     @RequestMapping("/jdbcexample")
     public String jdbcexample() throws Exception {
         Connection conn = null;
@@ -107,6 +109,72 @@ public class Controller {
         return webContents;
 
     }
+
+    // Example #5 : restCalculatorResult
+    @RequestMapping("/restCalculatorResult")
+    public CalculatorObject restCalculatorResult(@RequestParam(value="firstNo", defaultValue ="0") int firstNo,
+                                                 @RequestParam(value="secondNo", defaultValue="0") int secondNo) {
+        int sum = firstNo + secondNo;
+        CalculatorObject obj = new CalculatorObject(firstNo,secondNo,sum);
+        return obj;
+    }
+
+
+    // Example #6 : RestJDBCResult
+    // Example #6-1 : JDBC function
+    private Connection PostgresqlConnector() throws Exception {
+        Connection conn = null;
+        String IP_ADDRESS="";
+        String PORT="";
+        String DB_NAME=""; // Student Number
+        String ID= ""; //Student Number
+        String Passwd= "";  //Password
+
+        String webContents = "";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            conn = DriverManager.getConnection("jdbc:postgresql://" + IP_ADDRESS + ":" + PORT + "/" + DB_NAME, ID, Passwd);
+
+        }
+        catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return conn;
+    }
+
+    // Example #6-2 : JDBC RestfulAPI
+    @RequestMapping("/restjdbcexample")
+    public List<GeneInfoObject> restjdbcexample(@RequestParam(value="geneid", defaultValue ="0") int geneid) throws Exception {
+        Connection conn = PostgresqlConnector();
+
+        String sql = "";
+        if (geneid == 0 ) {
+            sql = "select geneid, symbol, synonyms from gene_info limit 100";
+        } else {
+            sql = "select geneid, symbol, synonyms from gene_info where geneid = '"+Integer.toString(geneid)+"' limit 100";
+        }
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+
+        List<GeneInfoObject> geneInfoList = new ArrayList<GeneInfoObject>();
+
+        while(rs.next()) {
+            geneInfoList.add(new GeneInfoObject(rs.getString("geneid"),rs.getString("symbol"),rs.getString("synonyms")));
+        }
+
+        stmt.close();
+        conn.close();
+
+        return geneInfoList;
+
+    }
+
 
 
 }
