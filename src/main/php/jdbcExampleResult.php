@@ -19,14 +19,14 @@ $result = json_decode($json);
 Your input geneid : <?php echo $geneid; ?> <br>
 <table>
     <tr><td>geneid</td><td>symbol</td><td>synonyms</td></tr>
-    <tr>
-        <?php foreach($result as $value) {
-            echo "<td>".$value["geneid"]."</td>";
-            echo "<td>".$value["symbol"]."</td>";
-            echo "<td>".$value["synonyms"]."</td>";
-        }
-        ?>
-    </tr>
+    <?php foreach($result as $value) {
+        echo "<tr>";
+        echo "<td>".$value->geneid."</td>";
+        echo "<td>".$value->symbol."</td>";
+        echo "<td>".$value->synonyms."</td>";
+        echo "</tr>";
+    }
+    ?>
 </table>
 
 </body>

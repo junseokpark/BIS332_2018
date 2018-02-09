@@ -11,14 +11,13 @@ curl_setopt($ch, CURLOPT_POSTFIELDS,"firstNo=".$firstNo."&secondNo=".$secondNo);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $json = curl_exec($ch);
 curl_close ($ch);
-
 $result = json_decode($json);
 ?>
 <html>
 <title>bis332 first example</title>
 <body>
-Your input firstNo is <?php echo $firstNo; ?>. <br>
-Your input secondNo is <?php echo $secondNo; ?>.<br>
-Sum is <?php echo $result['sum']; ?>.<br>
+Your input firstNo is <?php echo $result->firstNo; ?>. <br>
+Your input secondNo is <?php echo $result->secondNo; ?>.<br>
+Sum is <?php echo $result->sum; ?>.<br>
 </body>
 </html>
