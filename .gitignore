@@ -39,6 +39,7 @@ temp*
 dist
 test-output
 build.log
+compile
 
 
 
@@ -52,3 +53,4 @@ build.log
 #  ^\.pc/
 !/libs/*
 !/libs/lib/*
+!/libs/jarContents/*
