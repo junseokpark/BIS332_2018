@@ -53,4 +53,4 @@ compile
 #  ^\.pc/
 !/libs/*
 !/libs/lib/*
-!/libs/jarContents/*
+!/libs/lib/jarContents/jarContents.tar
