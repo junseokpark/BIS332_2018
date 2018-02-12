@@ -6,7 +6,10 @@ STARTPORT=8399
 # Prepare combile director
 rm -rf ./compile
 mkdir -p compile
-cp -R libs/jarContents/* compile
+cp -R libs/jarContents/*.tar compile
+cd compile;tar -xvf jarContents.tar
+rm -rf jarContents.tar
+cd ..
 
 # Get jdk information
 jdkVersion=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}')
