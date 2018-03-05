@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: bis332
+Implementation-Version: 0.0.1-SNAPSHOT
+Archiver-Version: Plexus Archiver
+Built-By: {username}
+Implementation-Vendor-Id: ac.kaist.bisl
+Spring-Boot-Version: 1.5.10.RELEASE
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: org.springframework.boot.loader.JarLauncher
+Start-Class: bis332.Application
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Created-By: {username}
+Build-Jdk: {jdkversion}
+Implementation-URL: http://github.com/junseokpark/bis332_2018/
+

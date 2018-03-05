@@ -39,6 +39,9 @@ temp*
 dist
 test-output
 build.log
+compile
+
+
 
 # other scm
 .svn
@@ -48,12 +51,6 @@ build.log
 # switch to regexp syntax.
 #  syntax: regexp
 #  ^\.pc/
-!/libs/commons-logging-1.2.jar
-!/libs/spring-aop-4.3.14.RELEASE.jar
-!/libs/spring-context-4.3.14.RELEASE.jar
-!/libs/spring-beans-4.3.14.RELEASE.jar
-!/libs/spring-core-4.3.14.RELEASE.jar
-!/libs/spring-expression-4.3.14.RELEASE.jar
-!/libs/spring-boot-1.5.10.RELEASE.jar
-!/libs/spring-boot-autoconfigure-1.5.10.RELEASE.jar
-!/libs/spring-web-4.3.14.RELEASE.jar
+!/libs/*
+!/libs/lib/*
+!/libs/lib/jarContents/jarContents.tar
