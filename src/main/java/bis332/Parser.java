@@ -11,11 +11,11 @@ public class Parser {
     // Database connector
     private Connection PostgresqlConnector() throws Exception {
         Connection conn = null;
-        String IP_ADDRESS="";
-        String PORT="";
-        String DB_NAME=""; // Student Number
-        String ID= ""; //Student Number
-        String Passwd= "";  //Password
+        String IP_ADDRESS="biostar.kaist.ac.kr";
+        String PORT="5432";
+        String DB_NAME="uta"; // Student Number
+        String ID= "uta"; //Student Number
+        String Passwd= "tabislaprom3";  //Password
 
         try {
             Class.forName("org.postgresql.Driver");
@@ -33,12 +33,18 @@ public class Parser {
     }
 
 
-    public String queryGeneration(String query, String[] lineArray) {
+    public String queryGeneration(String query, String[] lineArray, String tableName) {
         String inputValues = "";
         for (int i = 0; i < lineArray.length; i++) {
             String value = lineArray[i];
             value = value.replaceAll("\"", "\\\"").replaceAll("'", "''");
-            inputValues = inputValues + "'" + value + "',";
+
+            if (value.matches("[0-9]+") && value.length() >= 1) {
+                inputValues = inputValues + value + ",";
+            } else {
+                inputValues = inputValues + "'" + value + "',";
+            }
+
         }
         return query + inputValues.substring(0,inputValues.length()-1) + ")";
 
@@ -49,7 +55,7 @@ public class Parser {
         String[] lineArray = line.split("\t");
 
         String query = "insert into  " + tableName + " VALUES (";
-        query = queryGeneration(query,lineArray);
+        query = queryGeneration(query,lineArray, tableName);
 
         try {
 
