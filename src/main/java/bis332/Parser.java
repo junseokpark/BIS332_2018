@@ -45,18 +45,13 @@ public class Parser {
     }
 
     // Insert data to table from read line string
-    public void insertLineToTableRow(String tableName,String line) throws Exception {
+    public void insertLineToTableRow(Statement stmt,String tableName,String line) throws Exception {
         String[] lineArray = line.split("\t");
 
         String query = "insert into  " + tableName + " VALUES (";
         query = queryGeneration(query,lineArray);
 
-        Connection conn = null;
-        Statement stmt = null;
-
         try {
-            conn = PostgresqlConnector();
-            stmt = conn.createStatement();
 
             // Insert data to table
             stmt.executeUpdate(query);
@@ -67,38 +62,30 @@ public class Parser {
         }   catch(Exception e){
             //Handle errors for Class.forName
             e.printStackTrace();
-        }   finally{
-            //finally block used to close resources
-            try{
-                if(stmt!=null)
-                    conn.close();
-            }catch(SQLException se){
-            }// do nothing
-            try{
-                if(conn!=null)
-                    conn.close();
-            }catch(SQLException se){
-                se.printStackTrace();
-            }//end finally try
-        }//end try
+        }
 
     }
 
     // Load a file and read line by line from the file, then insert each line to selected database table
     public void insertDataToTable(String fileNameWithLocation, String tableName, Boolean headerIncluded) throws Exception {
         String line;
+        Connection conn = null;
+        Statement stmt = null;
 
         try {
 
             //File Read
             BufferedReader bufferreader = new BufferedReader(new FileReader(fileNameWithLocation));
+            conn = PostgresqlConnector();
+            stmt = conn.createStatement();
+
             line = bufferreader.readLine();
 
             if (headerIncluded = true) {line = bufferreader.readLine();}
             while (line != null) {
 
                 // Insert Line to Database Table
-                insertLineToTableRow(tableName, line);
+                insertLineToTableRow(stmt,tableName, line);
                 // Read line
                 line = bufferreader.readLine();
             }
@@ -108,7 +95,21 @@ public class Parser {
             ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
+        }  finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    conn.close();
+            }catch(SQLException se){
+            }// do nothing
+            try{
+                if(conn!=null)
+                  conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+
 
     }
 
