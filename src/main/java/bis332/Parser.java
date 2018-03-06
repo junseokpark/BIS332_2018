@@ -11,11 +11,11 @@ public class Parser {
     // Database connector
     private Connection PostgresqlConnector() throws Exception {
         Connection conn = null;
-        String IP_ADDRESS="biostar.kaist.ac.kr";
-        String PORT="5432";
-        String DB_NAME="uta"; // Student Number
-        String ID= "uta"; //Student Number
-        String Passwd= "tabislaprom3";  //Password
+        String IP_ADDRESS="";
+        String PORT="";
+        String DB_NAME=""; // Student Number
+        String ID= ""; //Student Number
+        String Passwd= "";  //Password
 
         try {
             Class.forName("org.postgresql.Driver");
