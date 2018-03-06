@@ -33,23 +33,23 @@ public class Parser {
     }
 
 
+    public String queryGeneration(String query, String[] lineArray) {
+        String inputValues = "";
+        for (int i = 0; i < lineArray.length; i++) {
+            String value = lineArray[i];
+            value = value.replaceAll("\"", "\\\"").replaceAll("'", "''");
+            inputValues = inputValues + "'" + value + "',";
+        }
+        return query + inputValues.substring(0,inputValues.length()-1) + ")";
+
+    }
+
     // Insert data to table from read line string
     public void insertLineToTableRow(String tableName,String line) throws Exception {
         String[] lineArray = line.split("\t");
-        String query = "insert into  " + tableName + " VALUES (";
 
-        // Build insert query per a table
-        switch(tableName) {
-            case "tableA" :
-                query = query + " '"+lineArray[0]+"',"+lineArray[1]+")";
-                break;
-            case "tableB" :
-                query = query + " '"+lineArray[0]+"',"+lineArray[1]+")";
-                break;
-            default :
-                query = "invalid table name";
-                break;
-        }
+        String query = "insert into  " + tableName + " VALUES (";
+        query = queryGeneration(query,lineArray);
 
         Connection conn = null;
         Statement stmt = null;
@@ -87,7 +87,6 @@ public class Parser {
     // Load a file and read line by line from the file, then insert each line to selected database table
     public void insertDataToTable(String fileNameWithLocation, String tableName, Boolean headerIncluded) throws Exception {
         String line;
-        Integer lineNo = 0;
 
         try {
 
@@ -95,16 +94,15 @@ public class Parser {
             BufferedReader bufferreader = new BufferedReader(new FileReader(fileNameWithLocation));
             line = bufferreader.readLine();
 
+            if (headerIncluded = true) {line = bufferreader.readLine();}
             while (line != null) {
-                // Read line
-                line = bufferreader.readLine();
 
                 // Insert Line to Database Table
-                if (headerIncluded = true) {
-                    if (lineNo > 1) { insertLineToTableRow(tableName, line); }
-                } else { insertLineToTableRow(tableName, line); }
-                lineNo++;
+                insertLineToTableRow(tableName, line);
+                // Read line
+                line = bufferreader.readLine();
             }
+
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
