@@ -113,9 +113,12 @@ public class Controller {
     // Example #5 : restCalculatorResult
     @RequestMapping("/restCalculatorResult")
     public CalculatorObject restCalculatorResult(@RequestParam(value="firstNo", defaultValue ="0") int firstNo,
-                                                 @RequestParam(value="secondNo", defaultValue="0") int secondNo) {
+                                                 @RequestParam(value="secondNo", defaultValue="0") int secondNo,
+                                                 @RequestParam(value="string", defaultValue="text") String text ) {
         int sum = firstNo + secondNo;
-        CalculatorObject obj = new CalculatorObject(firstNo,secondNo,sum);
+        String upperCase = text.toUpperCase();
+
+        CalculatorObject obj = new CalculatorObject(firstNo,secondNo,sum, upperCase);
         return obj;
     }
 
