@@ -112,7 +112,6 @@ public class Controller {
     }
 
     // Example #5 : restCalculatorResult
-    @CrossOrigin
     @RequestMapping("/restCalculatorResult")
     public CalculatorObject restCalculatorResult(@RequestParam(value="firstNo", defaultValue ="0") int firstNo,
                                                  @RequestParam(value="secondNo", defaultValue="0") int secondNo,
