@@ -2,6 +2,7 @@ package bis332;
 
 import bis332.objects.CalculatorObject;
 import bis332.objects.GeneInfoObject;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -111,6 +112,7 @@ public class Controller {
     }
 
     // Example #5 : restCalculatorResult
+    @CrossOrigin
     @RequestMapping("/restCalculatorResult")
     public CalculatorObject restCalculatorResult(@RequestParam(value="firstNo", defaultValue ="0") int firstNo,
                                                  @RequestParam(value="secondNo", defaultValue="0") int secondNo,
